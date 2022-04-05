@@ -1,7 +1,6 @@
 import 'package:crew_app/screens/home_screen.dart';
 import 'package:crew_app/screens/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -129,8 +128,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: <Widget>[
                     SizedBox(
                       height: 150.0,
-                      child: Image.asset(
-                        "assets/logo.png",
+                      child: Image.network(
+                        "https://i.imgur.com/whdnZLA.png",
                         fit: BoxFit.contain,
                       ),
                     ),

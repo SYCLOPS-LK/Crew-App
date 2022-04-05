@@ -223,8 +223,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     children: <Widget>[
                       SizedBox(
                         height: 150.0,
-                        child: Image.asset(
-                          "assets/logo.png",
+                        child: Image.network(
+                          "https://i.imgur.com/whdnZLA.png",
                           fit: BoxFit.contain,
                         ),
                       ),
