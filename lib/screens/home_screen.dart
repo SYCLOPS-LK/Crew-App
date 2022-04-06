@@ -1,8 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:crew_app/model/user_model.dart';
-import 'package:crew_app/screens/login_screen.dart';
+import 'package:crew_app/screens/crew_screen.dart';
+import 'package:crew_app/screens/main_screen.dart';
+import 'package:crew_app/screens/settings_screen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,33 +12,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  User? user = FirebaseAuth.instance.currentUser;
-  UserModel loggedInUser = UserModel();
   @override
-  void initState() {
-    super.initState();
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(user!.uid)
-        .get()
-        .then((value) {
-      this.loggedInUser = UserModel.fromMap(value.data());
-      setState(() {});
-    });
-  }
-
   final bottomNavigationBarItems = <Widget>[
-    Icon(
+    const Icon(
       Icons.person_outline,
       size: 30.0,
       color: Color.fromARGB(255, 20, 28, 36),
     ),
-    Icon(
+    const Icon(
       Icons.home_outlined,
       size: 30.0,
       color: Color.fromARGB(255, 20, 28, 36),
     ),
-    Icon(
+    const Icon(
       Icons.settings_outlined,
       size: 30.0,
       color: Color.fromARGB(255, 20, 28, 36),
@@ -48,6 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   var index = 1;
 
+  final screens = [
+    const CrewScreen(),
+    const MainScreen(),
+    const SettingsScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,12 +46,12 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: const Color.fromARGB(255, 20, 28, 36),
       bottomNavigationBar: CurvedNavigationBar(
         index: index,
-        color: Color.fromARGB(255, 246, 170, 79),
+        color: const Color.fromARGB(255, 246, 170, 79),
         backgroundColor: Colors.transparent,
         height: 50.0,
         items: bottomNavigationBarItems,
         onTap: (index) => setState(() => this.index = index),
-        animationDuration: Duration(milliseconds: 200),
+        animationDuration: const Duration(milliseconds: 200),
       ),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 246, 170, 79),
@@ -73,13 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         centerTitle: true,
       ),
-      body: Center(child: Text("$index")),
+      body: screens[index],
     );
-  }
-
-  Future<void> logout(BuildContext context) async {
-    await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const LoginScreen()));
   }
 }
