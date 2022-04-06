@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crew_app/model/user_model.dart';
-import 'package:crew_app/screens/crew_screen.dart';
 import 'package:crew_app/screens/login_screen.dart';
-import 'package:crew_app/screens/settings_screen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -47,13 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
       color: Color.fromARGB(255, 20, 28, 36),
     ),
   ];
-  var index = 1;
 
-  final screens = <Widget>[
-    CrewScreen(),
-    HomeScreen(),
-    SettingsScreen(),
-  ];
+  var index = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         centerTitle: true,
       ),
-      body: screens[index],
+      body: Center(child: Text("$index")),
     );
   }
 
