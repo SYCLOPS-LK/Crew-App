@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: const Color.fromARGB(255, 20, 28, 36),
+      backgroundColor: Colors.transparent,
       bottomNavigationBar: CurvedNavigationBar(
         index: index,
         color: const Color.fromARGB(255, 246, 170, 79),
