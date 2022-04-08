@@ -12,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
+  // @override
   final bottomNavigationBarItems = <Widget>[
     const Icon(
       Icons.person_outline,
@@ -43,11 +43,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: Colors.transparent,
+      backgroundColor: const Color.fromARGB(255, 20, 28, 36),
       bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Colors.transparent,
         index: index,
         color: const Color.fromARGB(255, 246, 170, 79),
-        backgroundColor: Colors.transparent,
         height: 50.0,
         items: bottomNavigationBarItems,
         onTap: (index) => setState(() => this.index = index),
