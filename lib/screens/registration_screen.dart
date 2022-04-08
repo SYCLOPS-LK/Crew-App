@@ -4,6 +4,7 @@ import 'package:crew_app/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:crew_app/preference/user_preference.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -191,7 +192,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       borderRadius: BorderRadius.circular(30.0),
       color: const Color.fromARGB(255, 246, 170, 79),
       child: MaterialButton(
-        onPressed: () {
+        onPressed: () async {
+          await userPreferences.setEmail(emailEditingController.text);
           signUp(emailEditingController.text, passwordEditingController.text);
         },
         child: const Text(

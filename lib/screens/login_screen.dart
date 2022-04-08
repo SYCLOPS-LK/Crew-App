@@ -3,6 +3,7 @@ import 'package:crew_app/screens/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:crew_app/preference/user_preference.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -21,6 +22,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // Firebase Auth
   final _auth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    emailController.text = userPreferences.getEmail() ?? "";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +104,8 @@ class _LoginScreenState extends State<LoginScreen> {
       borderRadius: BorderRadius.circular(30.0),
       color: const Color.fromARGB(255, 246, 170, 79),
       child: MaterialButton(
-        onPressed: () {
+        onPressed: () async {
+          await userPreferences.setEmail(emailController.text);
           signIn(emailController.text, passwordController.text);
         },
         child: const Text(
