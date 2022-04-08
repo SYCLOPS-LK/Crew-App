@@ -193,7 +193,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       color: const Color.fromARGB(255, 246, 170, 79),
       child: MaterialButton(
         onPressed: () async {
-          await userPreferences.setEmail(emailEditingController.text);
+          await UserPreferences.setEmail(emailEditingController.text);
           signUp(emailEditingController.text, passwordEditingController.text);
         },
         child: const Text(
@@ -299,7 +299,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         .collection("users")
         .doc(user.uid)
         .set(userModel.toMap());
-    Fluttertoast.showToast(msg: "Registration successful");
+    Fluttertoast.showToast(msg: "Credentials recorded");
     Navigator.pushAndRemoveUntil(
         (context),
         MaterialPageRoute(builder: (context) => HomeScreen()),

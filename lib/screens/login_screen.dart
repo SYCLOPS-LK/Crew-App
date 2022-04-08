@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    emailController.text = userPreferences.getEmail() ?? "";
+    emailController.text = UserPreferences.getEmail() ?? "";
   }
 
   @override
@@ -105,8 +105,8 @@ class _LoginScreenState extends State<LoginScreen> {
       color: const Color.fromARGB(255, 246, 170, 79),
       child: MaterialButton(
         onPressed: () async {
-          await userPreferences.setEmail(emailController.text);
-          signIn(emailController.text, passwordController.text);
+          signIn(emailController.text.trim(), passwordController.text.trim());
+          await UserPreferences.setEmail(emailController.text.trim());
         },
         child: const Text(
           "Login",
@@ -122,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 20, 28, 36),
+      backgroundColor: const Color.fromARGB(255, 20, 28, 36),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -188,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await _auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((uid) => {
-                Fluttertoast.showToast(msg: "Logged In"),
+                Fluttertoast.showToast(msg: "Credentials confirmed"),
                 Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) => HomeScreen())),
               })
